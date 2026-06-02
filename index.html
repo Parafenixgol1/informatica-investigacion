@@ -1,230 +1,15 @@
 <!DOCTYPE html>
-<!-- El elemento html envuelve todo el contenido de la página -->
 <html lang="es">
 <head>
-    <!-- Los metadatos van dentro del head (no se ven directamente en la página) -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mi Primera Página Web - Elementos Avanzados</title>
-
-    <!-- Estilos CSS Básicos y limpios para dar un formato amigable a todos los nuevos elementos -->
-    <style>
-        /* Estilo para todo el cuerpo de la página */
-        body {
-            font-family: Arial, sans-serif; /* Tipo de letra común */
-            line-height: 1.6;               /* Espaciado entre líneas */
-            background-color: #f4f4f9;      /* Color de fondo gris claro */
-            color: #333333;                 /* Color del texto gris oscuro */
-            margin: 0;
-            padding: 20px;
-        }
-
-        /* Estilo para el contenedor principal */
-        .contenedor {
-            max-width: 650px;               /* Ancho máximo de la página ligeramente mayor */
-            margin: 0 auto;                 /* Centra el contenido en la pantalla */
-            background-color: #ffffff;      /* Fondo blanco para el contenido */
-            padding: 30px;
-            border-radius: 8px;             /* Bordes redondeados sencillos */
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1); /* Sombra suave */
-        }
-
-        /* Estilo de los títulos (Selectores de etiqueta) */
-        h1 {
-            color: #2c3e50;                 /* Color azul oscuro */
-            border-bottom: 2px solid #3498db; /* Línea decorativa abajo del título principal */
-            padding-bottom: 10px;
-        }
-
-        h2 {
-            color: #2980b9;
-            margin-top: 30px;
-            border-bottom: 1px dashed #cccccc;
-            padding-bottom: 5px;
-        }
-
-        h3 {
-            color: #16a085;
-            margin-top: 20px;
-        }
-
-        /* Estilo para los enlaces */
-        a {
-            color: #3498db;
-            text-decoration: none;          /* Quita el subrayado por defecto */
-        }
-
-        a:hover {
-            text-decoration: underline;     /* Subraya el enlace al pasar el ratón */
-        }
-
-        /* --- ESTILOS PARA TABLAS --- */
-        table {
-            width: 100%;
-            border-collapse: collapse;      /* Junta los bordes de las celdas */
-            margin: 20px 0;
-        }
-
-        th, td {
-            border: 1px solid #dddddd;
-            padding: 10px;
-            text-align: left;
-        }
-
-        th {
-            background-color: #3498db;
-            color: white;
-            font-weight: bold;
-        }
-
-        /* Zebra-striping: filas alternas con color gris suave */
-        tr:nth-child(even) {
-            background-color: #f9f9f9;
-        }
-
-        /* --- ESTILOS PARA CITAS (BLOCKQUOTE) --- */
-        blockquote {
-            background-color: #f9f9f9;
-            border-left: 5px solid #2980b9;
-            margin: 20px 0;
-            padding: 15px;
-            font-style: italic;
-            color: #555555;
-        }
-
-        /* --- ESTILOS PARA ACORDEÓN / DESPLEGABLE (DETAILS) --- */
-        details {
-            background-color: #fdfdfd;
-            border: 1px solid #e2e8f0;
-            border-radius: 6px;
-            padding: 12px;
-            margin-bottom: 10px;
-        }
-
-        summary {
-            font-weight: bold;
-            cursor: pointer;
-            color: #2c3e50;
-            outline: none;
-        }
-
-        details[open] {
-            border-color: #3498db;
-            background-color: #f7fafc;
-        }
-
-        /* --- ESTILOS PARA CÓDIGO Y RESALTADOS --- */
-        code {
-            background-color: #f1f1f1;
-            padding: 2px 6px;
-            border-radius: 4px;
-            font-family: 'Courier New', Courier, monospace;
-            font-size: 0.9em;
-        }
-
-        mark {
-            background-color: #f1c40f;      /* Fondo amarillo vibrante */
-            color: black;
-            padding: 2px 4px;
-            border-radius: 2px;
-        }
-
-        /* Estilo general para todos los botones de la página */
-        button {
-            background-color: #3498db;
-            color: white;
-            padding: 10px 15px;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;                /* Cambia el cursor a una mano al pasar por encima */
-        }
-
-        button:hover {
-            background-color: #2980b9;      /* Oscurece el botón al pasar el ratón */
-        }
-
-
-        /* ==========================================================================
-           🎨 MODIFICACIONES DE CSS APUNTANDO DIRECTAMENTE A IDs (#)
-           Recuerda: Los selectores de ID tienen mayor prioridad (especificidad) que 
-           los selectores de clase o etiqueta en CSS.
-           ========================================================================== */
-
-        /* Apuntamos específicamente al botón sorpresa usando su ID para cambiar su estilo */
-        #botonSorpresa {
-            background-color: #e67e22;       /* Color naranja exclusivo */
-            border: 2px solid #d35400;       /* Borde naranja oscuro */
-            font-weight: bold;
-            font-size: 1.05em;
-            box-shadow: 0 3px 6px rgba(0,0,0,0.1);
-        }
-
-        #botonSorpresa:hover {
-            background-color: #d35400;       /* Naranja más oscuro al pasar el cursor */
-            transform: scale(1.02);          /* Hace crecer el botón un poquito */
-            transition: all 0.2s ease;
-        }
-
-        /* Apuntamos al contenedor del formulario usando su ID */
-        #miFormulario {
-            background-color: #fdfefe;       /* Fondo blanco muy limpio */
-            border: 2px solid #3498db;       /* Borde azul sólido */
-            padding: 25px;
-            border-radius: 12px;             /* Bordes más redondeados */
-            box-shadow: inset 0 1px 3px rgba(0,0,0,0.02);
-        }
-
-        /* Apuntamos al mensaje de alerta sorpresa por su ID */
-        #mensajeOculto {
-            border-left: 6px solid #2ecc71;  /* Borde izquierdo verde brillante */
-            background-color: #e8f8f5;       /* Fondo verde menta muy suave */
-            color: #117a65;                  /* Letra verde oscura para que se lea bien */
-            font-weight: 500;
-        }
-
-        /* Apuntamos al mensaje de éxito del formulario por su ID */
-        #mensajeExito {
-            border-left: 6px solid #9b59b6;  /* Borde izquierdo morado */
-            background-color: #f5eef8;       /* Fondo morado muy claro */
-            color: #6c3483;                  /* Letra morada oscura */
-            font-weight: bold;
-        }
-
-
-        /* Estilo sencillo para el formulario */
-        .campo-formulario {
-            margin-bottom: 15px;            /* Espacio entre cada pregunta */
-        }
-
-        label {
-            display: block;                 /* Hace que la etiqueta se coloque arriba del campo */
-            font-weight: bold;
-            margin-bottom: 5px;
-        }
-
-        input[type="text"], input[type="email"], textarea {
-            width: 100%;                    /* Ocupa todo el ancho disponible */
-            padding: 8px;
-            border: 1px solid #cccccc;
-            border-radius: 4px;
-            box-sizing: border-box;         /* Evita que el input se salga de los márgenes */
-        }
-
-        /* Estilo para el área de mensajes interactivos genéricos (clase alerta) */
-        .alerta {
-            background-color: #d4edda;
-            color: #155724;
-            padding: 10px;
-            border: 1px solid #c3e6cb;
-            border-radius: 4px;
-            margin-top: 15px;
-            display: none;                  /* Oculto al principio */
-        }
-    </style>
+    <title>Mi Primera Página Web - Estructura</title>
+    
+    <!-- 🔗 CONEXIÓN CON EL CSS: Indicamos la ruta de nuestra hoja de estilos -->
+    <link rel="stylesheet" href="estilos.css">
 </head>
 <body>
 
-    <!-- Todo lo que está dentro de body es lo que se muestra en el navegador -->
     <div class="contenedor">
         
         <!-- ENCABEZADOS -->
@@ -239,7 +24,7 @@
         <p>Me gusta mucho la tecnología y estoy dando mis primeros pasos en el desarrollo web profesional.</p>
         <img src="Tecnun_logo.png" 
              alt="Pantalla con código de programación" 
-             style="width: 100%; height: auto; border-radius: 4px; margin-top: 10px;">
+             class="imagen-presentacion">
 
         <!-- CITAS TEXTUALES -->
         <h2>Una frase inspiradora</h2>
@@ -250,7 +35,7 @@
             <small>— Alan Kay</small>
         </blockquote>
 
-        <!-- LISTAS (Desordenadas y Ordenadas) -->
+        <!-- LISTAS -->
         <h2>Listas de contenido</h2>
         
         <h3>Lista Desordenada (Conceptos aprendidos):</h3>
@@ -304,39 +89,36 @@
             </tbody>
         </table>
 
-        <!-- DESPLEGABLES (DETAILS) -->
+        <!-- DESPLEGABLES -->
         <h2>Preguntas Frecuentes (FAQ)</h2>
         <p>Pulsa en las siguientes preguntas para ver cómo se despliega la respuesta nativamente:</p>
 
         <details>
             <summary>¿Qué es una etiqueta semántica en HTML?</summary>
-            <p style="margin-top: 10px; color: #555555;">Es una etiqueta que tiene un significado claro tanto para el navegador como para el desarrollador. Ejemplos de esto son <code>&lt;header&gt;</code>, <code>&lt;article&gt;</code> and <code>&lt;footer&gt;</code>, que reemplazan al genérico <code>&lt;div&gt;</code>.</p>
+            <p class="respuesta-faq">Es una etiqueta que tiene un significado claro tanto para el navegador como para el desarrollador. Ejemplos de esto son <code>&lt;header&gt;</code>, <code>&lt;article&gt;</code> y <code>&lt;footer&gt;</code>.</p>
         </details>
 
         <details>
             <summary>¿Necesito un servidor web para ver mi HTML?</summary>
-            <p style="margin-top: 10px; color: #555555;">No. Los archivos <code>.html</code> se ejecutan directamente en cualquier navegador web local abriendo el archivo desde tu disco duro.</p>
+            <p class="respuesta-faq">No. Los archivos <code>.html</code> se ejecutan directamente en cualquier navegador web local abriendo el archivo desde tu disco duro.</p>
         </details>
 
         <!-- ENLACES -->
         <h2>Enlaces de interés</h2>
         <p>Puedes seguir mi progreso visitando mi repositorio:</p>
-        <p>👉 Visita mi <a href="https://github.com/Parafenixgol1" target="_blank">perfil de GitHub</a> para ver mis futuros proyectos.</p>
+        <p>👉 Visita mi <a href="[https://github.com/Parafenixgol1](https://github.com/Parafenixgol1)" target="_blank">perfil de GitHub</a> para ver mis futuros proyectos.</p>
 
-        <!-- BOTÓN CON INTERACCIÓN JAVASCRIPT BÁSICA -->
+        <!-- BOTÓN INTERACTIVO -->
         <h2>Interactividad básica</h2>
         <p>Pulsa el botón de abajo para ver cómo funciona un evento simple:</p>
-        <!-- id="botonSorpresa" nos permite aplicar estilos CSS específicos (#botonSorpresa) -->
         <button id="botonSorpresa">¡Haz clic aquí!</button>
         
-        <!-- id="mensajeOculto" recibe un estilo verde personalizado -->
         <div id="mensajeOculto" class="alerta">
             🎉 ¡Genial! Has hecho clic. Este texto ha aparecido usando un código JavaScript muy sencillo que interactúa con el HTML.
         </div>
 
-        <!-- FORMULARIO DE CONTACTO SENCILLO -->
+        <!-- FORMULARIO DE CONTACTO -->
         <h2>Escríbeme un mensaje</h2>
-        <!-- id="miFormulario" recibe un borde azul y fondo estilizado especial -->
         <form id="miFormulario">
             <div class="campo-formulario">
                 <label for="nombre">Tu Nombre:</label>
@@ -356,44 +138,13 @@
             <button type="submit">Enviar datos</button>
         </form>
 
-        <!-- id="mensajeExito" recibe un diseño morado exclusivo en vez del verde genérico -->
         <div id="mensajeExito" class="alerta">
             ✉️ ¡Mensaje simulado enviado correctamente!
         </div>
 
     </div>
 
-    <!-- JAVASCRIPT BÁSICO -->
-    <script>
-        // 1. Buscamos los elementos del HTML por su ID único
-        const boton = document.getElementById('botonSorpresa');
-        const mensaje = document.getElementById('mensajeOculto');
-        const formulario = document.getElementById('miFormulario');
-        const mensajeExito = document.getElementById('mensajeExito');
-
-        // 2. Le decimos al botón qué hacer cuando alguien haga "click"
-        boton.addEventListener('click', function() {
-            if (mensaje.style.display === 'block') {
-                mensaje.style.display = 'none';
-                boton.textContent = '¡Haz clic aquí!';
-            } else {
-                mensaje.style.display = 'block';
-                boton.textContent = 'Ocultar mensaje';
-            }
-        });
-
-        // 3. Controlamos qué pasa cuando el usuario envía el formulario
-        formulario.addEventListener('submit', function(evento) {
-            evento.preventDefault(); // Evita que la página se recargue al pulsar enviar
-            
-            mensajeExito.style.display = 'block'; // Mostramos el mensaje de éxito
-            formulario.reset(); // Vaciamos los campos del formulario para poder escribir otro
-
-            // Ocultamos el mensaje de éxito automáticamente después de 4 segundos
-            setTimeout(function() {
-                mensajeExito.style.display = 'none';
-            }, 4000);
-        });
-    </script>
+    <!-- ⚡ CONEXIÓN CON JAVASCRIPT: Cargamos el comportamiento al final para no ralentizar la carga visual -->
+    <script src="script.js"></script>
 </body>
 </html>
