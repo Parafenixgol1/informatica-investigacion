@@ -3,148 +3,346 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mi Primera Página Web - Estructura</title>
-    
-    <!-- 🔗 CONEXIÓN CON EL CSS: Indicamos la ruta de nuestra hoja de estilos -->
+    <title>Informática para la Investigación — IA en Localización Vehicular</title>
     <link rel="stylesheet" href="estilos.css">
 </head>
 <body>
 
-    <div class="contenedor">
-        
-        <!-- ENCABEZADOS -->
-        <h1>¡Hola! Bienvenido a mi primera web 🚀</h1>
-        <p>Este es mi primer sitio web real. Lo estoy construyendo mientras aprendo las bases de <strong>HTML5</strong> y <strong>CSS3</strong>.</p>
-
-        <!-- FORMATO DE TEXTO -->
-        <p>Hoy he descubierto cómo usar <mark>texto resaltado</mark> y cómo estructurar fragmentos de código de programación, por ejemplo: <code>&lt;p&gt;Hola Mundo&lt;/p&gt;</code>.</p>
-
-        <!-- IMÁGENES -->
-        <h2>Un poco sobre mí</h2>
-        <p>Me gusta mucho la tecnología y estoy dando mis primeros pasos en el desarrollo web profesional.</p>
-        <img src="Tecnun_logo.png" 
-             alt="Pantalla con código de programación" 
-             class="imagen-presentacion">
-
-        <!-- CITAS TEXTUALES -->
-        <h2>Una frase inspiradora</h2>
-        <p>Para mantenerme motivado mientras aprendo a programar, sigo este gran consejo:</p>
-        <blockquote>
-            "La mejor forma de predecir el futuro es creándolo."
-            <br>
-            <small>— Alan Kay</small>
-        </blockquote>
-
-        <!-- LISTAS -->
-        <h2>Listas de contenido</h2>
-        
-        <h3>Lista Desordenada (Conceptos aprendidos):</h3>
-        <ul>
-            <li>La estructura básica del documento.</li>
-            <li>Uso de etiquetas semánticas.</li>
-            <li>Inserción de enlaces e imágenes de forma accesible.</li>
-        </ul>
-
-        <h3>Lista Ordenada (Ruta de aprendizaje paso a paso):</h3>
-        <p>Este es mi plan secuencial de estudio:</p>
-        <ol>
-            <li>Dominar la estructuración lógica con <strong>HTML5</strong>.</li>
-            <li>Aprender a dar estilos visuales increíbles con <strong>CSS3</strong>.</li>
-            <li>Dotar de interactividad y dinamismo a la web con <strong>JavaScript</strong>.</li>
-            <li>Crear proyectos personales y publicarlos en Internet.</li>
-        </ol>
-
-        <!-- TABLA DE DATOS -->
-        <h2>Mi Planificador Semanal</h2>
-        <p>Aquí organizo mi tiempo dedicado al estudio de programación:</p>
-        <table>
-            <thead>
-                <tr>
-                    <th>Día de la semana</th>
-                    <th>Tecnología</th>
-                    <th>Horas dedicadas</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>Lunes</td>
-                    <td>HTML5 (Estructuras básicas)</td>
-                    <td>2 horas</td>
-                </tr>
-                <tr>
-                    <td>Miércoles</td>
-                    <td>CSS3 (Introducción al diseño)</td>
-                    <td>2 horas</td>
-                </tr>
-                <tr>
-                    <td>Viernes</td>
-                    <td>Prácticas de laboratorio y retos</td>
-                    <td>3 horas</td>
-                </tr>
-                <tr>
-                    <td>Sábado</td>
-                    <td>Repaso y Lectura de Código</td>
-                    <td>1.5 horas</td>
-                </tr>
-            </tbody>
-        </table>
-
-        <!-- DESPLEGABLES -->
-        <h2>Preguntas Frecuentes (FAQ)</h2>
-        <p>Pulsa en las siguientes preguntas para ver cómo se despliega la respuesta nativamente:</p>
-
-        <details>
-            <summary>¿Qué es una etiqueta semántica en HTML?</summary>
-            <p class="respuesta-faq">Es una etiqueta que tiene un significado claro tanto para el navegador como para el desarrollador. Ejemplos de esto son <code>&lt;header&gt;</code>, <code>&lt;article&gt;</code> y <code>&lt;footer&gt;</code>.</p>
-        </details>
-
-        <details>
-            <summary>¿Necesito un servidor web para ver mi HTML?</summary>
-            <p class="respuesta-faq">No. Los archivos <code>.html</code> se ejecutan directamente en cualquier navegador web local abriendo el archivo desde tu disco duro.</p>
-        </details>
-
-        <!-- ENLACES -->
-        <h2>Enlaces de interés</h2>
-        <p>Puedes seguir mi progreso visitando mi repositorio:</p>
-        <p>👉 Visita mi <a href="[https://github.com/Parafenixgol1](https://github.com/Parafenixgol1)" target="_blank">perfil de GitHub</a> para ver mis futuros proyectos.</p>
-
-        <!-- BOTÓN INTERACTIVO -->
-        <h2>Interactividad básica</h2>
-        <p>Pulsa el botón de abajo para ver cómo funciona un evento simple:</p>
-        <button id="botonSorpresa">¡Haz clic aquí!</button>
-        
-        <div id="mensajeOculto" class="alerta">
-            🎉 ¡Genial! Has hecho clic. Este texto ha aparecido usando un código JavaScript muy sencillo que interactúa con el HTML.
+<header class="site-header">
+    <div class="header-inner">
+        <img src="Tecnun_logo.png" alt="Tecnun" class="logo-header">
+        <div>
+            <h1>Informática para la Investigación</h1>
+            <p class="site-subtitle">IA aplicada a la localización de vehículos autónomos · TECNUN</p>
         </div>
-
-        <!-- FORMULARIO DE CONTACTO -->
-        <h2>Escríbeme un mensaje</h2>
-        <form id="miFormulario">
-            <div class="campo-formulario">
-                <label for="nombre">Tu Nombre:</label>
-                <input type="text" id="nombre" placeholder="Escribe tu nombre" required>
-            </div>
-
-            <div class="campo-formulario">
-                <label for="correo">Tu Correo Electrónico:</label>
-                <input type="email" id="correo" placeholder="ejemplo@correo.com" required>
-            </div>
-
-            <div class="campo-formulario">
-                <label for="mensaje">Tu Mensaje:</label>
-                <textarea id="mensaje" rows="3" placeholder="Hola, ¿cómo estás?" required></textarea>
-            </div>
-
-            <button type="submit">Enviar datos</button>
-        </form>
-
-        <div id="mensajeExito" class="alerta">
-            ✉️ ¡Mensaje simulado enviado correctamente!
-        </div>
-
     </div>
+    <nav class="tab-nav" role="navigation" aria-label="Módulos">
+        <button class="tab-btn active" data-tab="m1">
+            <span class="tab-num">01</span>
+            <span class="tab-label">HTML</span>
+        </button>
+        <button class="tab-btn" data-tab="m2">
+            <span class="tab-num">02</span>
+            <span class="tab-label">CSS</span>
+        </button>
+        <button class="tab-btn" data-tab="m3">
+            <span class="tab-num">03</span>
+            <span class="tab-label">JS Básico</span>
+        </button>
+        <button class="tab-btn" data-tab="m4">
+            <span class="tab-num">04</span>
+            <span class="tab-label">Datos</span>
+        </button>
+        <button class="tab-btn tab-btn--ia" data-tab="m5">
+            <span class="tab-num">05</span>
+            <span class="tab-label">Simulación IA</span>
+        </button>
+    </nav>
+</header>
 
-    <!-- ⚡ CONEXIÓN CON JAVASCRIPT: Cargamos el comportamiento al final para no ralentizar la carga visual -->
-    <script src="script.js"></script>
+<main class="main-content">
+
+    <!-- ====== MÓDULO 1: HTML SEMÁNTICO ====== -->
+    <section id="m1" class="modulo activo" aria-label="Módulo 1 HTML Semántico">
+        <div class="modulo-intro">
+            <span class="modulo-badge">Módulo 01</span>
+            <h2>HTML Semántico</h2>
+            <p>El contenido estructurado como fundamento de la web. Usamos etiquetas que dan <em>significado</em> al documento, no solo forma visual.</p>
+        </div>
+
+        <article class="articulo-semantico">
+            <header>
+                <h3>Localización en Vehículos Autónomos</h3>
+                <p><time datetime="2025">2025</time> · Investigación doctoral · TECNUN — Universidad de Navarra</p>
+            </header>
+
+            <section>
+                <h4>¿Qué es la localización vehicular?</h4>
+                <p>La <strong>localización</strong> es la capacidad de un vehículo autónomo de conocer su posición exacta en el mundo en tiempo real. Sin ella, ningún sistema de navegación, planificación de trayectoria o evitación de obstáculos puede funcionar correctamente.</p>
+                <p>Los sistemas actuales combinan múltiples sensores para estimar la posición con <mark>precisión centimétrica</mark>, un requisito esencial para la seguridad vial.</p>
+            </section>
+
+            <section>
+                <h4>Tecnologías de localización</h4>
+                <dl>
+                    <dt>GPS / GNSS</dt>
+                    <dd>Sistema de posicionamiento global por satélite. Precisión estándar: 3–5 m. Degradado en túneles, entornos urbanos densos y condiciones atmosféricas adversas.</dd>
+                    <dt>LiDAR</dt>
+                    <dd>Sensor láser de distancia 3D. Genera nubes de puntos de alta densidad. Precisión: &lt;10 cm. Alto coste computacional y económico.</dd>
+                    <dt>Cámara estéreo</dt>
+                    <dd>Profundidad visual por disparidad. Sensible a condiciones de iluminación. Complementa al LiDAR a menor coste y añade información semántica.</dd>
+                    <dt>IMU (Unidad de Medición Inercial)</dt>
+                    <dd>Mide aceleración y velocidad angular a alta frecuencia (~1000 Hz). Independiente de señal exterior, pero acumula error (deriva) con el tiempo.</dd>
+                </dl>
+            </section>
+
+            <section>
+                <h4>El reto: fusión de sensores con IA</h4>
+                <p>Cada sensor tiene fortalezas y debilidades específicas. La investigación actual explora cómo las <strong>redes neuronales y los algoritmos bayesianos</strong> —como el Filtro de Kalman Extendido o los Filtros de Partículas— pueden combinarlos de forma óptima para obtener una estimación robusta y precisa.</p>
+                <blockquote cite="https://arxiv.org/">
+                    "La fusión de sensores guiada por IA reduce el error de posicionamiento hasta un 90% respecto al GPS estándar en entornos urbanos complejos."
+                    <footer>— Revisión bibliográfica, IEEE Transactions on Intelligent Vehicles, 2024</footer>
+                </blockquote>
+            </section>
+
+            <aside class="nota-tecnica">
+                <h4>Nota técnica · HTML semántico</h4>
+                <p>Este artículo usa <code>&lt;article&gt;</code>, <code>&lt;section&gt;</code>, <code>&lt;aside&gt;</code>, <code>&lt;dl&gt;</code>/<code>&lt;dt&gt;</code>/<code>&lt;dd&gt;</code>, <code>&lt;time&gt;</code> y <code>&lt;blockquote cite="..."&gt;</code>. Son preferibles a <code>&lt;div&gt;</code> genéricos porque aportan significado semántico a motores de búsqueda, lectores de pantalla y herramientas de análisis de contenido.</p>
+            </aside>
+
+            <footer>
+                <p>Fuentes: IEEE Transactions on Intelligent Vehicles · arXiv.org · Autonomous Vehicles Research Journal</p>
+            </footer>
+        </article>
+    </section>
+
+
+    <!-- ====== MÓDULO 2: CSS ====== -->
+    <section id="m2" class="modulo" aria-label="Módulo 2 CSS">
+        <div class="modulo-intro">
+            <span class="modulo-badge">Módulo 02</span>
+            <h2>CSS: Diseño y Layout</h2>
+            <p>De estructura plana a interfaz visual. CSS Grid, Flexbox y animaciones aplicados al contenido de investigación.</p>
+        </div>
+
+        <div class="m2-controls">
+            <button id="toggleEstilos" class="btn-secondary" style="background:white;border:1px solid #d1d5db;padding:9px 18px;border-radius:6px;cursor:pointer;font-size:.85rem">Quitar estilos CSS</button>
+            <span class="m2-hint">Observa cómo el mismo HTML cambia radicalmente con y sin CSS</span>
+        </div>
+
+        <div class="sensor-grid" id="sensorGrid">
+            <article class="sensor-card sensor-card--gps">
+                <div class="sensor-icon">📡</div>
+                <h3>GPS / GNSS</h3>
+                <div class="sensor-stats">
+                    <div class="stat"><span class="stat-val">3–5 m</span><span class="stat-label">Error típico</span></div>
+                    <div class="stat"><span class="stat-val">10 Hz</span><span class="stat-label">Frecuencia</span></div>
+                </div>
+                <div class="sensor-bar-wrap"><div class="sensor-bar sensor-bar--low" style="width:20%"></div></div>
+                <p class="sensor-desc">Global, sin mantenimiento local. Degradado en entornos cerrados y con multipaths urbanos.</p>
+                <span class="sensor-tag">Infraestructura</span>
+            </article>
+
+            <article class="sensor-card sensor-card--lidar">
+                <div class="sensor-icon">🔴</div>
+                <h3>LiDAR</h3>
+                <div class="sensor-stats">
+                    <div class="stat"><span class="stat-val">&lt;10 cm</span><span class="stat-label">Error típico</span></div>
+                    <div class="stat"><span class="stat-val">20 Hz</span><span class="stat-label">Frecuencia</span></div>
+                </div>
+                <div class="sensor-bar-wrap"><div class="sensor-bar sensor-bar--high" style="width:93%"></div></div>
+                <p class="sensor-desc">Alta precisión 3D. Robusto de noche. Afectado por lluvia intensa y polvo. Coste elevado.</p>
+                <span class="sensor-tag">Proximidad</span>
+            </article>
+
+            <article class="sensor-card sensor-card--cam">
+                <div class="sensor-icon">📷</div>
+                <h3>Cámara estéreo</h3>
+                <div class="sensor-stats">
+                    <div class="stat"><span class="stat-val">10–30 cm</span><span class="stat-label">Error típico</span></div>
+                    <div class="stat"><span class="stat-val">30 Hz</span><span class="stat-label">Frecuencia</span></div>
+                </div>
+                <div class="sensor-bar-wrap"><div class="sensor-bar sensor-bar--med" style="width:68%"></div></div>
+                <p class="sensor-desc">Rica información semántica. Sensible a cambios de iluminación y condiciones climáticas.</p>
+                <span class="sensor-tag">Visual</span>
+            </article>
+
+            <article class="sensor-card sensor-card--imu">
+                <div class="sensor-icon">⚡</div>
+                <h3>IMU</h3>
+                <div class="sensor-stats">
+                    <div class="stat"><span class="stat-val">~1 cm/s²</span><span class="stat-label">Resolución</span></div>
+                    <div class="stat"><span class="stat-val">1000 Hz</span><span class="stat-label">Frecuencia</span></div>
+                </div>
+                <div class="sensor-bar-wrap"><div class="sensor-bar sensor-bar--med" style="width:55%"></div></div>
+                <p class="sensor-desc">Altísima frecuencia. Independiente de señal exterior. Deriva acumulativa con el tiempo.</p>
+                <span class="sensor-tag">Inercial</span>
+            </article>
+
+            <article class="sensor-card sensor-card--fusion">
+                <div class="sensor-icon">🤖</div>
+                <h3>Fusión con IA</h3>
+                <div class="sensor-stats">
+                    <div class="stat"><span class="stat-val">&lt;5 cm</span><span class="stat-label">Error típico</span></div>
+                    <div class="stat"><span class="stat-val">Adaptativa</span><span class="stat-label">Frecuencia</span></div>
+                </div>
+                <div class="sensor-bar-wrap"><div class="sensor-bar sensor-bar--top" style="width:97%"></div></div>
+                <p class="sensor-desc">Combina todos los sensores compensando sus debilidades individuales. Objetivo de la investigación.</p>
+                <span class="sensor-tag sensor-tag--ia">IA</span>
+            </article>
+        </div>
+    </section>
+
+
+    <!-- ====== MÓDULO 3: JS BÁSICO ====== -->
+    <section id="m3" class="modulo" aria-label="Módulo 3 JS Básico">
+        <div class="modulo-intro">
+            <span class="modulo-badge">Módulo 03</span>
+            <h2>JavaScript: Interactividad y DOM</h2>
+            <p>Manipulación dinámica del documento. Eventos, cálculo en tiempo real y persistencia con <code>localStorage</code>.</p>
+        </div>
+
+        <div class="m3-layout">
+            <div class="m3-demo-card">
+                <h3>Demo: Ruido GPS en tiempo real</h3>
+                <p>Simula cómo el ruido gaussiano afecta a una señal GPS. Ajusta el nivel de ruido y añade mediciones para observar la dispersión alrededor de la posición real.</p>
+                <div class="gps-canvas-wrap">
+                    <canvas id="gpsDemo" width="380" height="260"></canvas>
+                </div>
+                <div class="control-row">
+                    <label for="noiseSlider">Ruido: <strong id="noiseVal">15</strong> m</label>
+                    <input type="range" id="noiseSlider" min="2" max="50" value="15">
+                </div>
+                <div class="control-row">
+                    <button id="btnAddMeasure" class="btn-primary">+ Añadir medición GPS</button>
+                    <button id="btnClearMeasure" class="btn-secondary">Limpiar</button>
+                </div>
+                <div id="gpsStats" class="stats-row">Sin mediciones aún.</div>
+            </div>
+
+            <div class="m3-demo-card">
+                <h3>Quiz: ¿Qué sensor usarías?</h3>
+                <p>Pon a prueba tu comprensión sobre cuándo usar cada tecnología de localización.</p>
+                <div id="quiz"></div>
+                <div id="quizResult" class="quiz-result"></div>
+                <p class="local-storage-note">Tu puntuación se guarda automáticamente en <code>localStorage</code>.</p>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- ====== MÓDULO 4: DATOS ====== -->
+    <section id="m4" class="modulo" aria-label="Módulo 4 Datos">
+        <div class="modulo-intro">
+            <span class="modulo-badge">Módulo 04</span>
+            <h2>Datos y Visualización</h2>
+            <p>JSON y Chart.js para transformar datos de investigación en visualizaciones interactivas y filtrables.</p>
+        </div>
+
+        <div class="m4-filtros">
+            <span>Filtrar sensores:</span>
+            <label><input type="checkbox" class="sensor-check" value="GPS" checked> GPS</label>
+            <label><input type="checkbox" class="sensor-check" value="LiDAR" checked> LiDAR</label>
+            <label><input type="checkbox" class="sensor-check" value="Cámara" checked> Cámara</label>
+            <label><input type="checkbox" class="sensor-check" value="IMU" checked> IMU</label>
+            <label><input type="checkbox" class="sensor-check" value="Fusión IA" checked> Fusión IA</label>
+        </div>
+
+        <div class="charts-grid">
+            <div class="chart-card">
+                <h3>Error medio de posicionamiento (m)</h3>
+                <canvas id="chartBar" height="220"></canvas>
+            </div>
+            <div class="chart-card">
+                <h3>Convergencia del Filtro de Kalman vs GPS</h3>
+                <canvas id="chartLine" height="220"></canvas>
+            </div>
+        </div>
+
+        <div class="tabla-datos">
+            <h3>Tabla comparativa de sensores</h3>
+            <table id="tablaSensores">
+                <thead>
+                    <tr>
+                        <th>Sensor</th>
+                        <th>Error medio (m)</th>
+                        <th>Desviación std (m)</th>
+                        <th>Frecuencia (Hz)</th>
+                        <th>Coste</th>
+                        <th>Robustez</th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+        </div>
+    </section>
+
+
+    <!-- ====== MÓDULO 5: SIMULACIÓN IA ====== -->
+    <section id="m5" class="modulo" aria-label="Módulo 5 Simulación IA">
+        <div class="modulo-intro">
+            <span class="modulo-badge modulo-badge--ia">Módulo 05 · Investigación</span>
+            <h2>Simulación: IA en Localización Vehicular</h2>
+            <p>Demostración interactiva del <strong>Filtro de Kalman</strong> aplicado a la corrección de señal GPS en un vehículo autónomo. Compara la medición bruta del GPS con la estimación filtrada.</p>
+        </div>
+
+        <div class="sim-layout">
+            <div class="sim-canvas-wrap">
+                <canvas id="simCanvas" width="640" height="380"></canvas>
+                <div class="canvas-legend">
+                    <span class="legend-item legend-true">Trayectoria real</span>
+                    <span class="legend-item legend-gps">Medición GPS</span>
+                    <span class="legend-item legend-kalman">Estimación filtrada</span>
+                </div>
+            </div>
+
+            <div class="sim-controls">
+                <div class="control-group">
+                    <h4>Control</h4>
+                    <div class="btn-row">
+                        <button id="simPlay" class="btn-primary">▶ Play</button>
+                        <button id="simReset" class="btn-secondary">↺ Reset</button>
+                    </div>
+                    <div class="speed-row">
+                        <label for="simSpeed">Velocidad</label>
+                        <input type="range" id="simSpeed" min="0.5" max="3" step="0.5" value="1">
+                        <span id="simSpeedVal">×1</span>
+                    </div>
+                </div>
+
+                <div class="control-group">
+                    <h4>Ruido GPS (σ)</h4>
+                    <div class="noise-btns">
+                        <button class="noise-btn active" data-noise="10">Bajo <small>±10 px</small></button>
+                        <button class="noise-btn" data-noise="25">Medio <small>±25 px</small></button>
+                        <button class="noise-btn" data-noise="50">Alto <small>±50 px</small></button>
+                    </div>
+                </div>
+
+                <div class="control-group">
+                    <h4>Algoritmo de corrección</h4>
+                    <select id="algoSelect">
+                        <option value="kalman">Filtro de Kalman</option>
+                        <option value="moving">Media móvil (N=8)</option>
+                        <option value="gps">Sin filtro (GPS crudo)</option>
+                    </select>
+                </div>
+
+                <div class="control-group sim-stats">
+                    <h4>Métricas en tiempo real</h4>
+                    <div class="stat-block">
+                        <span class="stat-name">RMSE GPS</span>
+                        <span class="stat-value stat-bad" id="rmseGPS">—</span>
+                    </div>
+                    <div class="stat-block">
+                        <span class="stat-name">RMSE Estimado</span>
+                        <span class="stat-value stat-good" id="rmseKalman">—</span>
+                    </div>
+                    <div class="stat-block">
+                        <span class="stat-name">Mejora</span>
+                        <span class="stat-value stat-highlight" id="rmseMejora">—</span>
+                    </div>
+                    <div class="stat-block">
+                        <span class="stat-name">Mediciones</span>
+                        <span class="stat-value" id="numMediciones">0</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="chart-card sim-chart-card">
+            <h3>Error de posicionamiento en tiempo real (px)</h3>
+            <canvas id="chartError" height="130"></canvas>
+        </div>
+    </section>
+
+</main>
+
+<footer class="site-footer">
+    <p>Informática para la Investigación · TECNUN · <a href="https://github.com/Parafenixgol1" target="_blank">GitHub</a></p>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<script src="script.js"></script>
 </body>
 </html>
