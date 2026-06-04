@@ -531,10 +531,13 @@ function initModule5() {
             nlosEl.className = 'stat-value ' + (nlosCount === 0 ? 'stat-good' : (nlosCount === ANCHORS.length ? 'stat-bad' : 'stat-highlight'));
         }
 
-        document.getElementById('rmseGPS').textContent     = rg !== null ? rg.toFixed(1) + ' px' : '—';
-        document.getElementById('rmseKalman').textContent  = re !== null ? re.toFixed(1) + ' px' : '—';
-        if (rg !== null && re !== null && rg > 0) {
-            document.getElementById('rmseMejora').textContent = ((rg - re) / rg * 100).toFixed(0) + '%';
+        const rmseGpsEl    = document.getElementById('rmseGPS');
+        const rmseKalEl    = document.getElementById('rmseKalman');
+        const rmseMejEl    = document.getElementById('rmseMejora');
+        if (rmseGpsEl)  rmseGpsEl.textContent  = rg !== null ? rg.toFixed(1) + ' px' : '—';
+        if (rmseKalEl)  rmseKalEl.textContent  = re !== null ? re.toFixed(1) + ' px' : '—';
+        if (rg !== null && re !== null && rg > 0 && rmseMejEl) {
+            rmseMejEl.textContent = ((rg - re) / rg * 100).toFixed(0) + '%';
         }
     }
 
