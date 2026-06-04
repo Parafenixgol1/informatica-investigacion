@@ -46,14 +46,14 @@ function initModule2() {
 }
 
 // ============================================================
-// MODULE 3 — GPS noise demo
+// MODULE 3 — Radio Frequency noise demo
 // ============================================================
 function initModule3() {
-    initGPSDemo();
+    initIndoorNoiseDemo();
     initQuiz();
 }
 
-function initGPSDemo() {
+function initIndoorNoiseDemo() {
     const canvas  = document.getElementById('gpsDemo');
     if (!canvas) return;
     const ctx     = canvas.getContext('2d');
@@ -71,49 +71,49 @@ function initGPSDemo() {
     function draw() {
         ctx.clearRect(0, 0, W, H);
 
-        // Grid
+        // Grid de Planta
         ctx.strokeStyle = '#1e293b'; ctx.lineWidth = 1;
         for (let x = 0; x < W; x += 40) { ctx.beginPath(); ctx.moveTo(x, 0); ctx.lineTo(x, H); ctx.stroke(); }
         for (let y = 0; y < H; y += 40) { ctx.beginPath(); ctx.moveTo(0, y); ctx.lineTo(W, y); ctx.stroke(); }
 
         const sigma = parseFloat(slider.value) * SCALE;
 
-        // Error radius circle
+        // Radio de incertidumbre electromagnética
         ctx.strokeStyle = 'rgba(96,165,250,0.4)'; ctx.lineWidth = 1.5; ctx.setLineDash([5, 5]);
         ctx.beginPath(); ctx.arc(cx, cy, sigma, 0, Math.PI * 2); ctx.stroke();
         ctx.setLineDash([]);
         ctx.fillStyle = 'rgba(96,165,250,0.06)';
         ctx.beginPath(); ctx.arc(cx, cy, sigma, 0, Math.PI * 2); ctx.fill();
 
-        // GPS measurements
+        // Pings de radiofrecuencia (mediciones)
         pts.forEach(p => {
             ctx.fillStyle = 'rgba(248,113,113,0.85)';
             ctx.beginPath(); ctx.arc(cx + p.x, cy + p.y, 4, 0, Math.PI * 2); ctx.fill();
         });
 
-        // Mean estimate
+        // Estimación promedio por centroide
         if (pts.length > 1) {
             const mx = pts.reduce((s, p) => s + p.x, 0) / pts.length;
             const my = pts.reduce((s, p) => s + p.y, 0) / pts.length;
             ctx.fillStyle = '#34d399';
             ctx.beginPath(); ctx.arc(cx + mx, cy + my, 6, 0, Math.PI * 2); ctx.fill();
             ctx.fillStyle = '#34d399'; ctx.font = '11px sans-serif';
-            ctx.fillText('Media', cx + mx + 9, cy + my + 4);
+            ctx.fillText('Centroide Est.', cx + mx + 9, cy + my + 4);
         }
 
-        // True position
+        // Posición real esperada
         ctx.fillStyle = '#60a5fa';
         ctx.beginPath(); ctx.arc(cx, cy, 6, 0, Math.PI * 2); ctx.fill();
         ctx.fillStyle = '#60a5fa'; ctx.font = 'bold 11px sans-serif';
-        ctx.fillText('Real', cx + 10, cy - 4);
+        ctx.fillText('Real (Activo)', cx + 10, cy - 4);
     }
 
     function updateStats() {
-        if (pts.length === 0) { statsEl.textContent = 'Sin mediciones aún.'; return; }
+        if (pts.length === 0) { statsEl.textContent = 'Sin pings recibidos aún.'; return; }
         const errs = pts.map(p => Math.sqrt(p.x * p.x + p.y * p.y) / SCALE);
         const mean = errs.reduce((s, e) => s + e, 0) / errs.length;
         const rmse = Math.sqrt(errs.reduce((s, e) => s + e * e, 0) / errs.length);
-        statsEl.innerHTML = `<strong>${pts.length}</strong> mediciones &nbsp;·&nbsp; Error medio: <strong>${mean.toFixed(1)} m</strong> &nbsp;·&nbsp; RMSE: <strong>${rmse.toFixed(1)} m</strong>`;
+        statsEl.innerHTML = `<strong>${pts.length}</strong> pings de red &nbsp;·&nbsp; Desviación Media: <strong>${mean.toFixed(1)} m</strong> &nbsp;·&nbsp; RMSE en Planta: <strong>${rmse.toFixed(1)} m</strong>`;
     }
 
     slider.addEventListener('input', () => { noiseEl.textContent = slider.value; draw(); });
@@ -127,26 +127,26 @@ function initGPSDemo() {
 }
 
 // ============================================================
-// MODULE 3 — Quiz
+// MODULE 3 — Indoor Localization Quiz
 // ============================================================
 const QUIZ = [
     {
-        q: '¿Qué sensor usarías para localización dentro de un túnel largo?',
-        opts: ['GPS / GNSS', 'IMU + odometría', 'LiDAR', 'Cámara estéreo'],
-        ans: 1,
-        exp: 'El GPS no recibe señal satelital en túneles. La IMU con odometría (dead-reckoning) es la solución estándar.'
-    },
-    {
-        q: 'Necesitas detectar obstáculos de noche con precisión centimétrica. ¿Qué sensor eliges?',
-        opts: ['Cámara RGB', 'GPS diferencial', 'LiDAR', 'IMU'],
+        q: '¿Qué tecnología ofrece precisión centimétrica en interiores basándose en el tiempo de vuelo (ToF) de impulsos de radio?',
+        opts: ['Wi-Fi estándar', 'Balizas BLE (Bluetooth)', 'UWB (Ultra-Wideband)', 'GPS de doble frecuencia'],
         ans: 2,
-        exp: 'El LiDAR es independiente de la luz ambiental y ofrece precisión centimétrica en 3D.'
+        exp: 'La banda ultraancha (UWB) destaca en interiores industriales por su precisión ultra-alta e inmunidad a los ecos electromagnéticos multitrayecto.'
     },
     {
-        q: '¿Qué problema tiene usar la IMU sola durante periodos largos?',
-        opts: ['Baja frecuencia de muestreo', 'Deriva acumulativa del error', 'Requiere cobertura celular', 'No mide ángulos'],
+        q: 'Si deseas desplegar una solución económica para guiar clientes en un centro comercial sin instalar costosas infraestructuras, ¿cuál eliges?',
+        opts: ['Balizas BLE activadas por batería', 'Sistemas LiDAR fijos', 'Redes de anclajes UWB', 'Estructuras pseudo-satelitales'],
+        ans: 0,
+        exp: 'Las balizas BLE son baratas, compactas, operan años con pilas de botón y se integran nativamente con smartphones comerciales.'
+    },
+    {
+        q: '¿Cuál es la principal desventaja de usar una IMU a solas para estimar la trayectoria de un operario (Pedestrian Dead Reckoning)?',
+        opts: ['No registra variaciones de orientación', 'Deriva destructiva por acumulación sistemática del error', 'Incapacidad absoluta de operar bajo techo', 'Sufre interferencias por muros de hormigón'],
         ans: 1,
-        exp: 'La integración de aceleraciones acumula error (drift) con el tiempo, haciendo que la posición estimada se aleje de la real.'
+        exp: 'Al integrar de manera sucesiva aceleraciones y giros, los pequeños ruidos aleatorios del chip inercial crean un desvío (drift) que crece con el tiempo.'
     }
 ];
 
@@ -156,7 +156,7 @@ function initQuiz() {
     if (!quizEl) return;
 
     let answers = {};
-    const saved = localStorage.getItem('quiz_score_m3');
+    const saved = localStorage.getItem('quiz_score_m3_indoor');
 
     quizEl.innerHTML = QUIZ.map((q, i) => `
         <div class="quiz-question">
@@ -185,31 +185,31 @@ function initQuiz() {
             if (answers[i] === q.ans) correct++;
         });
         const score = `${correct}/${QUIZ.length}`;
-        localStorage.setItem('quiz_score_m3', score);
+        localStorage.setItem('quiz_score_m3_indoor', score);
         resultEl.className = 'quiz-result show ' + (correct === QUIZ.length ? 'passed' : 'failed');
         resultEl.textContent = correct === QUIZ.length
-            ? `¡Perfecto! ${score} respuestas correctas. Puntuación guardada en localStorage.`
-            : `${score} correctas. Las respuestas correctas están marcadas en verde. Puntuación guardada.`;
+            ? `¡Magnífico! ${score} aciertos. Registrado de forma persistente en localStorage.`
+            : `${score} correctas. Revisa las soluciones marcadas en verde. Historial actualizado.`;
     });
 
     if (saved) {
         resultEl.className = 'quiz-result show info';
-        resultEl.textContent = `Última puntuación guardada (localStorage): ${saved}`;
+        resultEl.textContent = `Puntuación previa recuperada (localStorage): ${saved}`;
     }
 }
 
 // ============================================================
-// MODULE 4 — Charts + Table
+// MODULE 4 — Charts + Table (Indoor Sensors Data)
 // ============================================================
 const SENSOR_DATA = [
-    { name: 'GPS',       error: 4.2,  std: 1.8,  freq: 10,   cost: '★☆☆', robustez: 'Media' },
-    { name: 'LiDAR',     error: 0.08, std: 0.02, freq: 20,   cost: '★★★', robustez: 'Alta' },
-    { name: 'Cámara',    error: 0.22, std: 0.12, freq: 30,   cost: '★★☆', robustez: 'Media-baja' },
-    { name: 'IMU',       error: 0.15, std: 0.05, freq: 1000, cost: '★☆☆', robustez: 'Alta' },
-    { name: 'Fusión IA', error: 0.04, std: 0.01, freq: null, cost: '★★★', robustez: 'Muy alta' },
+    { name: 'Wi-Fi',     error: 3.5,  std: 1.2,  freq: 2,    cost: '★☆☆', robustez: 'Media' },
+    { name: 'UWB',       error: 0.08, std: 0.03, freq: 50,   cost: '★★★', robustez: 'Alta' },
+    { name: 'BLE',       error: 2.1,  std: 0.7,  freq: 10,   cost: '★☆☆', robustez: 'Media' },
+    { name: 'IMU',       error: 0.20, std: 0.08, freq: 200,  cost: '★☆☆', robustez: 'Alta' },
+    { name: 'Fusión IA', error: 0.05, std: 0.02, freq: null, cost: '★★★', robustez: 'Muy alta' },
 ];
 
-const COLORS = { 'GPS': '#64748b', 'LiDAR': '#ef4444', 'Cámara': '#f59e0b', 'IMU': '#10b981', 'Fusión IA': '#8b5cf6' };
+const COLORS = { 'Wi-Fi': '#64748b', 'UWB': '#ef4444', 'BLE': '#f59e0b', 'IMU': '#10b981', 'Fusión IA': '#8b5cf6' };
 
 let chartBar, chartLine;
 
@@ -261,11 +261,11 @@ function buildCharts(data) {
         options: {
             responsive: true,
             plugins: { legend: { display: false } },
-            scales: { y: { beginAtZero: true, title: { display: true, text: 'metros' } } }
+            scales: { y: { beginAtZero: true, title: { display: true, text: 'Metros' } } }
         }
     });
 
-    // Kalman convergence synthetic curve
+    // Curva sintética de estabilización de Kalman vs fluctuación Wi-Fi
     const iters = Array.from({ length: 25 }, (_, i) => i + 1);
     chartLine = new Chart(lineCtx, {
         type: 'line',
@@ -273,16 +273,16 @@ function buildCharts(data) {
             labels: iters,
             datasets: [
                 {
-                    label: 'GPS sin filtro',
-                    data: iters.map(() => +(4.2 + randn() * 0.4).toFixed(2)),
+                    label: 'Señal Wi-Fi cruda (Ruido Electromagnético)',
+                    data: iters.map(() => +(3.5 + randn() * 0.5).toFixed(2)),
                     borderColor: '#ef4444',
                     backgroundColor: 'rgba(239,68,68,.1)',
                     tension: 0.3,
                     pointRadius: 3,
                 },
                 {
-                    label: 'Filtro de Kalman',
-                    data: iters.map(i => +Math.max(0.04, 4.2 * Math.exp(-i * 0.22) + randn() * 0.04).toFixed(3)),
+                    label: 'Filtro Kalman Inteligente',
+                    data: iters.map(i => +Math.max(0.05, 3.5 * Math.exp(-i * 0.25) + randn() * 0.03).toFixed(3)),
                     borderColor: '#10b981',
                     backgroundColor: 'rgba(16,185,129,.1)',
                     tension: 0.4,
@@ -293,7 +293,7 @@ function buildCharts(data) {
         options: {
             responsive: true,
             plugins: { legend: { position: 'top', labels: { font: { size: 11 }, boxWidth: 12 } } },
-            scales: { y: { beginAtZero: true, title: { display: true, text: 'Error (m)' } } }
+            scales: { y: { beginAtZero: true, title: { display: true, text: 'Desviación Inst. (m)' } } }
         }
     });
 }
@@ -307,82 +307,81 @@ function updateBarChart(data) {
 }
 
 // ============================================================
-// MODULE 5 — Kalman filter simulation
+// MODULE 5 — Kalman filter simulation (Indoor AGV tracking con 1 Muro)
 // ============================================================
-
-// -- Matrix helpers --
-function matMul(A, B) {
-    return A.map(row =>
-        B[0].map((_, j) => row.reduce((sum, v, k) => sum + v * B[k][j], 0))
-    );
-}
-function matAdd(A, B) { return A.map((r, i) => r.map((v, j) => v + B[i][j])); }
-function matSub(A, B) { return A.map((r, i) => r.map((v, j) => v - B[i][j])); }
-function transpose(A) { return A[0].map((_, j) => A.map(r => r[j])); }
-function matMulVec(M, v) { return M.map(row => row.reduce((s, val, j) => s + val * v[j], 0)); }
-function vecAdd(a, b) { return a.map((v, i) => v + b[i]); }
-function inv2x2(M) {
-    const d = M[0][0] * M[1][1] - M[0][1] * M[1][0];
-    return [[M[1][1] / d, -M[0][1] / d], [-M[1][0] / d, M[0][0] / d]];
-}
-function eye4() { return [[1,0,0,0],[0,1,0,0],[0,0,1,0],[0,0,0,1]]; }
-
-class KalmanFilter2D {
-    constructor(sigma) {
-        this.x = [320, 190, 0, 0]; // [px, py, vx, vy]
-        this.P = [[500,0,0,0],[0,500,0,0],[0,0,100,0],[0,0,0,100]];
-        this.sigma = sigma;
-    }
-
-    step(z) {
-        const dt = 1 / 30;
-        const F = [[1,0,dt,0],[0,1,0,dt],[0,0,1,0],[0,0,0,1]];
-        const H = [[1,0,0,0],[0,1,0,0]];
-        const q = 0.8;
-        const Q = [[q,0,0,0],[0,q,0,0],[0,0,q*8,0],[0,0,0,q*8]];
-        const r = this.sigma * this.sigma;
-        const R = [[r,0],[0,r]];
-
-        // Predict
-        const xp = matMulVec(F, this.x);
-        const Pp = matAdd(matMul(matMul(F, this.P), transpose(F)), Q);
-
-        // Update
-        const Ht = transpose(H);
-        const S  = matAdd(matMul(matMul(H, Pp), Ht), R);
-        const K  = matMul(matMul(Pp, Ht), inv2x2(S));
-        const y  = [z[0] - xp[0], z[1] - xp[1]];
-        this.x   = vecAdd(xp, matMulVec(K, y));
-        this.P   = matMul(matSub(eye4(), matMul(K, H)), Pp);
-
-        return [this.x[0], this.x[1]];
-    }
-}
-
 function initModule5() {
     const canvas = document.getElementById('simCanvas');
     if (!canvas) return;
     const ctx = canvas.getContext('2d');
     const W = canvas.width, H = canvas.height;
 
-    let running   = false;
-    let t         = 0;
-    let noise     = 10;
-    let algo      = 'kalman';
-    let speed     = 1;
-    let kf        = null;
-    let movWin    = [];
-    let frameId;
+    let running   = false, t = 0, noise = 8, algo = 'kalman', speed = 1, kf = null, movWin = [], frameId;
+    let trueTrail = [], gpsTrail = [], estTrail = [], gpsErrs = [], estErrs = [];
+    let errChart, errLabels = [], errGpsData = [], errEstData = [];
 
-    let trueTrail = [], gpsTrail = [], estTrail = [];
-    let gpsErrs   = [], estErrs  = [];
+    // --- ENTORNO: 3 ANCLAS Y 1 MURO CENTRAL ---
+    const ANCHORS = [
+        { x: 50,  y: 50,  id: 'A1' },
+        { x: 590, y: 50,  id: 'A2' },
+        { x: 320, y: 340, id: 'A3' }
+    ];
 
-    let errChart;
-    let errLabels = [], errGpsData = [], errEstData = [];
+    // Muro central exactamente definido
+    const MURO = { x: 260, y: 115, w: 120, h: 150, name: 'Muro de Hormigón' };
 
-    // Oval path centered on canvas
+    // Geometría: ¿El rayo de señal cruza el rectángulo del muro?
+    function lineIntersectsRect(x1, y1, x2, y2, rx, ry, rw, rh) {
+        const checkLine = (x1, y1, x2, y2, x3, y3, x4, y4) => {
+            let den = (x2 - x1) * (y4 - y3) - (x4 - x3) * (y2 - y1);
+            if (den === 0) return false;
+            let ua = ((x4 - x3) * (y1 - y3) - (y4 - y3) * (x1 - x3)) / den;
+            let ub = ((x2 - x1) * (y1 - y3) - (y2 - y1) * (x1 - x3)) / den;
+            return (ua >= 0 && ua <= 1 && ub >= 0 && ub <= 1);
+        };
+        // Evaluamos si el rayo choca con el borde Arriba, Derecha, Abajo o Izquierda del muro
+        return checkLine(x1, y1, x2, y2, rx, ry, rx + rw, ry) || 
+               checkLine(x1, y1, x2, y2, rx + rw, ry, rx + rw, ry + rh) || 
+               checkLine(x1, y1, x2, y2, rx + rw, ry + rh, rx, ry + rh) || 
+               checkLine(x1, y1, x2, y2, rx, ry + rh, rx, ry);
+    }
+
+    // Álgebra Matricial del Filtro
+    function matMul(A, B) { return A.map(row => B[0].map((_, j) => row.reduce((sum, v, k) => sum + v * B[k][j], 0))); }
+    function matAdd(A, B) { return A.map((r, i) => r.map((v, j) => v + B[i][j])); }
+    function matSub(A, B) { return A.map((r, i) => r.map((v, j) => v - B[i][j])); }
+    function transpose(A) { return A[0].map((_, j) => A.map(r => r[j])); }
+    function matMulVec(M, v) { return M.map(row => row.reduce((s, val, j) => s + val * v[j], 0)); }
+    function vecAdd(a, b) { return a.map((v, i) => v + b[i]); }
+    function inv2x2(M) {
+        const d = M[0][0] * M[1][1] - M[0][1] * M[1][0];
+        return [[M[1][1] / d, -M[0][1] / d], [-M[1][0] / d, M[0][0] / d]];
+    }
+
+    class KalmanFilter2D {
+        constructor(sigma) {
+            this.x = [320, 190, 0, 0]; 
+            this.P = [[500,0,0,0],[0,500,0,0],[0,0,100,0],[0,0,0,100]];
+            this.sigma = sigma;
+        }
+        step(z) {
+            const F = [[1,0,1/30,0],[0,1,0,1/30],[0,0,1,0],[0,0,0,1]];
+            const H = [[1,0,0,0],[0,1,0,0]];
+            const Q = [[0.6,0,0,0],[0,0.6,0,0],[0,0,5,0],[0,0,0,5]];
+            const R = [[this.sigma * this.sigma, 0], [0, this.sigma * this.sigma]];
+
+            const xp = matMulVec(F, this.x);
+            const Pp = matAdd(matMul(matMul(F, this.P), transpose(F)), Q);
+            const S  = matAdd(matMul(matMul(H, Pp), transpose(H)), R);
+            const K  = matMul(matMul(Pp, transpose(H)), inv2x2(S));
+            
+            this.x   = vecAdd(xp, matMulVec(K, [z[0] - xp[0], z[1] - xp[1]]));
+            this.P   = matMul(matSub([[1,0,0,0],[0,1,0,0],[0,0,1,0],[0,0,0,1]], matMul(K, H)), Pp);
+            return [this.x[0], this.x[1]];
+        }
+    }
+
     function truePt(t) {
-        return { x: W/2 + (W/2 - 70) * Math.cos(t), y: H/2 + (H/2 - 55) * Math.sin(t) };
+        return { x: W/2 + (W/2 - 80) * Math.cos(t), y: H/2 + (H/2 - 65) * Math.sin(t) };
     }
 
     function rmse(arr) {
@@ -392,18 +391,15 @@ function initModule5() {
 
     function resetSim() {
         t = 0; kf = null; movWin = [];
-        trueTrail = []; gpsTrail = []; estTrail = [];
-        gpsErrs = []; estErrs = [];
+        trueTrail = []; gpsTrail = []; estTrail = []; gpsErrs = []; estErrs = [];
         errLabels = []; errGpsData = []; errEstData = [];
         running = false;
         if (frameId) cancelAnimationFrame(frameId);
         document.getElementById('simPlay').textContent = '▶ Play';
         drawBg();
-        updateStats();
+        updateStats(0);
         if (errChart) {
-            errChart.data.labels = [];
-            errChart.data.datasets.forEach(d => d.data = []);
-            errChart.update('none');
+            errChart.data.labels = []; errChart.data.datasets.forEach(d => d.data = []); errChart.update('none');
         }
     }
 
@@ -416,122 +412,152 @@ function initModule5() {
 
     function drawPath(pts, color, lw) {
         if (pts.length < 2) return;
-        ctx.strokeStyle = color; ctx.lineWidth = lw;
-        ctx.beginPath(); ctx.moveTo(pts[0].x, pts[0].y);
-        pts.slice(1).forEach(p => ctx.lineTo(p.x, p.y));
-        ctx.stroke();
+        ctx.strokeStyle = color; ctx.lineWidth = lw; ctx.beginPath();
+        ctx.moveTo(pts[0].x, pts[0].y); pts.slice(1).forEach(p => ctx.lineTo(p.x, p.y)); ctx.stroke();
     }
 
     function drawDots(pts, color, r) {
-        pts.forEach(p => {
-            ctx.fillStyle = color;
-            ctx.beginPath(); ctx.arc(p.x, p.y, r, 0, Math.PI * 2); ctx.fill();
-        });
+        ctx.fillStyle = color;
+        pts.forEach(p => { ctx.beginPath(); ctx.arc(p.x, p.y, r, 0, Math.PI * 2); ctx.fill(); });
     }
 
     function frame() {
         if (!running) return;
-        t += 0.018 * speed;
+        t += 0.015 * speed;
 
         const tp = truePt(t);
-        const gp = { x: tp.x + randn() * noise, y: tp.y + randn() * noise };
+        let nlosCount = 0;
+        
+        drawBg();
 
+        // 1. Dibujar el Muro de Hormigón Central
+        ctx.fillStyle = 'rgba(148, 163, 184, 0.25)';
+        ctx.strokeStyle = '#64748b';
+        ctx.lineWidth = 1.5;
+        ctx.fillRect(MURO.x, MURO.y, MURO.w, MURO.h);
+        ctx.strokeRect(MURO.x, MURO.y, MURO.w, MURO.h);
+        ctx.fillStyle = '#94a3b8'; ctx.font = '10px sans-serif';
+        ctx.fillText(MURO.name, MURO.x + 15, MURO.y + 20);
+
+        // 2. Comprobar Matemáticamente el estado NLOS de cada Ancla
+        ANCHORS.forEach(anchor => {
+            // El rayo va desde el AGV (tp.x, tp.y) hasta el Ancla (anchor.x, anchor.y)
+            let isBlocked = lineIntersectsRect(tp.x, tp.y, anchor.x, anchor.y, MURO.x, MURO.y, MURO.w, MURO.h);
+            if (isBlocked) nlosCount++;
+
+            // Línea del rayo de radiofrecuencia (Verde LOS / Rojo discontinuo NLOS)
+            ctx.strokeStyle = isBlocked ? 'rgba(239, 68, 68, 0.7)' : 'rgba(16, 185, 129, 0.3)';
+            ctx.lineWidth = isBlocked ? 2 : 1.2;
+            if (isBlocked) ctx.setLineDash([4, 4]);
+            ctx.beginPath(); ctx.moveTo(tp.x, tp.y); ctx.lineTo(anchor.x, anchor.y); ctx.stroke();
+            ctx.setLineDash([]);
+        });
+
+        // 3. Dibujar las Anclas
+        ANCHORS.forEach(anchor => {
+            ctx.fillStyle = '#f59e0b'; ctx.beginPath(); ctx.arc(anchor.x, anchor.y, 8, 0, Math.PI * 2); ctx.fill();
+            ctx.strokeStyle = '#ffffff'; ctx.lineWidth = 1.5; ctx.stroke();
+            ctx.fillStyle = '#ffffff'; ctx.font = 'bold 9px sans-serif';
+            ctx.fillText(anchor.id, anchor.x - 6, anchor.y + 3);
+        });
+
+        // 4. Inyección del Multitrayecto Físico por NLOS
+        let effectiveNoise = noise;
+        let biasX = 0, biasY = 0;
+        
+        if (nlosCount > 0) {
+            effectiveNoise = noise * (1 + nlosCount * 1.5); // Aumenta la dispersión gaussiana
+            
+            // Simulación del rebote de onda: Empuja la medición bruta lejos del muro
+            biasX = 25 * nlosCount * Math.sign(tp.x - W/2); 
+            biasY = 25 * nlosCount * Math.sign(tp.y - H/2);
+        }
+
+        // Medición recibida (distorsionada)
+        const gp = { x: tp.x + randn() * effectiveNoise + biasX, y: tp.y + randn() * effectiveNoise + biasY };
+
+        // 5. Aplicar Filtro de Kalman (El filtro NO sabe del muro, asume varianza limpia)
         let ep;
         if (algo === 'kalman') {
             if (!kf) { kf = new KalmanFilter2D(noise); kf.x = [tp.x, tp.y, 0, 0]; }
+            kf.sigma = noise; 
             const [ex, ey] = kf.step([gp.x, gp.y]);
             ep = { x: ex, y: ey };
         } else if (algo === 'moving') {
-            movWin.push(gp);
-            if (movWin.length > 8) movWin.shift();
-            ep = { x: movWin.reduce((s, p) => s + p.x, 0) / movWin.length,
-                   y: movWin.reduce((s, p) => s + p.y, 0) / movWin.length };
+            movWin.push(gp); if (movWin.length > 8) movWin.shift();
+            ep = { x: movWin.reduce((s, p) => s + p.x, 0) / movWin.length, y: movWin.reduce((s, p) => s + p.y, 0) / movWin.length };
         } else {
             ep = gp;
         }
 
+        // Históricos
         trueTrail.push(tp); gpsTrail.push(gp); estTrail.push(ep);
-        const MAX = 350;
-        if (trueTrail.length > MAX) { trueTrail.shift(); gpsTrail.shift(); estTrail.shift(); }
+        if (trueTrail.length > 250) { trueTrail.shift(); gpsTrail.shift(); estTrail.shift(); }
 
         const ge = Math.sqrt((gp.x - tp.x) ** 2 + (gp.y - tp.y) ** 2);
         const ee = Math.sqrt((ep.x - tp.x) ** 2 + (ep.y - tp.y) ** 2);
         gpsErrs.push(ge); estErrs.push(ee);
         if (gpsErrs.length > 300) { gpsErrs.shift(); estErrs.shift(); }
 
-        // Draw
-        drawBg();
-        ctx.setLineDash([6, 5]);
-        drawPath(trueTrail, '#3b82f6', 1.5);
-        ctx.setLineDash([]);
-        drawDots(gpsTrail.filter((_, i) => i % 3 === 0), 'rgba(248,113,113,0.7)', 2.5);
+        // Renderizar estelas de posicionamiento
+        ctx.setLineDash([4, 4]); drawPath(trueTrail, '#3b82f6', 1.5); ctx.setLineDash([]);
+        drawDots(gpsTrail.filter((_, i) => i % 2 === 0), 'rgba(248,113,113,0.5)', 2);
         drawPath(estTrail, '#34d399', 2.5);
 
-        // Current dots
+        // Nodos instantáneos frontales
         [[tp, '#60a5fa', 8], [gp, '#f87171', 5], [ep, '#34d399', 7]].forEach(([p, c, r]) => {
             ctx.fillStyle = c; ctx.beginPath(); ctx.arc(p.x, p.y, r, 0, Math.PI * 2); ctx.fill();
         });
 
-        updateStats();
+        updateStats(nlosCount);
 
-        if (gpsErrs.length % 4 === 0) {
-            const n = gpsErrs.length;
-            errLabels.push(n);
-            errGpsData.push(+ge.toFixed(1));
-            errEstData.push(+ee.toFixed(1));
-            if (errLabels.length > 80) { errLabels.shift(); errGpsData.shift(); errEstData.shift(); }
-            if (errChart) {
-                errChart.data.labels = [...errLabels];
-                errChart.data.datasets[0].data = [...errGpsData];
-                errChart.data.datasets[1].data = [...errEstData];
-                errChart.update('none');
-            }
+        // Gráfica de Chart.js
+        if (gpsErrs.length % 4 === 0 && errChart) {
+            errLabels.push(gpsErrs.length); errGpsData.push(+ge.toFixed(1)); errEstData.push(+ee.toFixed(1));
+            if (errLabels.length > 60) { errLabels.shift(); errGpsData.shift(); errEstData.shift(); }
+            errChart.data.labels = [...errLabels]; errChart.data.datasets[0].data = [...errGpsData]; errChart.data.datasets[1].data = [...errEstData];
+            errChart.update('none');
         }
 
         frameId = requestAnimationFrame(frame);
     }
 
-    function updateStats() {
+    function updateStats(nlosCount) {
         const rg = rmse(gpsErrs), re = rmse(estErrs);
+        
+        const nlosEl = document.getElementById('nlosLinks');
+        if (nlosEl) {
+            nlosEl.textContent = `${nlosCount} / ${ANCHORS.length}`;
+            nlosEl.className = 'stat-value ' + (nlosCount === 0 ? 'stat-good' : (nlosCount === ANCHORS.length ? 'stat-bad' : 'stat-highlight'));
+        }
+
         document.getElementById('rmseGPS').textContent     = rg !== null ? rg.toFixed(1) + ' px' : '—';
         document.getElementById('rmseKalman').textContent  = re !== null ? re.toFixed(1) + ' px' : '—';
         if (rg !== null && re !== null && rg > 0) {
             document.getElementById('rmseMejora').textContent = ((rg - re) / rg * 100).toFixed(0) + '%';
-        } else {
-            document.getElementById('rmseMejora').textContent = '—';
         }
-        document.getElementById('numMediciones').textContent = gpsErrs.length;
     }
 
-    // Controls
+    // Vinculación de Eventos
     document.getElementById('simPlay').addEventListener('click', function () {
-        running = !running;
-        this.textContent = running ? '⏸ Pausa' : '▶ Play';
-        if (running) frame();
+        running = !running; this.textContent = running ? '⏸ Pausa' : '▶ Play'; if (running) frame();
     });
-
     document.getElementById('simReset').addEventListener('click', resetSim);
-
-    document.getElementById('simSpeed').addEventListener('input', function () {
-        speed = parseFloat(this.value);
-        document.getElementById('simSpeedVal').textContent = `×${speed}`;
-    });
-
+    document.getElementById('simSpeed').addEventListener('input', function () { speed = parseFloat(this.value); document.getElementById('simSpeedVal').textContent = `×${speed}`; });
+    
     document.querySelectorAll('.noise-btn').forEach(btn => {
         btn.addEventListener('click', function () {
             document.querySelectorAll('.noise-btn').forEach(b => b.classList.remove('active'));
             this.classList.add('active');
             noise = parseInt(this.dataset.noise);
-            if (kf) kf.sigma = noise;
         });
     });
 
     document.getElementById('algoSelect').addEventListener('change', function () {
-        algo = this.value;
-        kf = null; movWin = [];
+        algo = this.value; kf = null; movWin = [];
     });
 
-    // Error chart
+    // Gráfica de error
     const errCtx = document.getElementById('chartError');
     if (errCtx) {
         errChart = new Chart(errCtx, {
@@ -539,21 +565,16 @@ function initModule5() {
             data: {
                 labels: [],
                 datasets: [
-                    { label: 'GPS',       data: [], borderColor: '#f87171', backgroundColor: 'rgba(248,113,113,.08)', tension: 0.3, pointRadius: 0, borderWidth: 1.5 },
-                    { label: 'Estimado',  data: [], borderColor: '#34d399', backgroundColor: 'rgba(52,211,153,.1)',   tension: 0.4, pointRadius: 0, borderWidth: 2 }
+                    { label: 'Bruto de Radio', data: [], borderColor: '#f87171', backgroundColor: 'rgba(248,113,113,.06)', tension: 0.3, pointRadius: 0, borderWidth: 1.5 },
+                    { label: 'Filtro', data: [], borderColor: '#34d399', backgroundColor: 'rgba(52,211,153,.08)',  tension: 0.4, pointRadius: 0, borderWidth: 2 }
                 ]
             },
             options: {
-                responsive: true,
-                animation: false,
+                responsive: true, animation: false,
                 plugins: { legend: { position: 'top', labels: { font: { size: 11 }, boxWidth: 12 } } },
-                scales: {
-                    y: { beginAtZero: true, title: { display: true, text: 'Error (px)' } },
-                    x: { display: false }
-                }
+                scales: { y: { beginAtZero: true, title: { display: true, text: 'Desviación (px)' } }, x: { display: false } }
             }
         });
     }
-
     drawBg();
 }

@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Informática para la Investigación — IA en Localización Vehicular</title>
+    <title>Informática para la Investigación — IA en Localización en Interiores</title>
     <link rel="stylesheet" href="estilos.css">
 </head>
 <body>
@@ -13,7 +13,7 @@
         <img src="Tecnun_logo.png" alt="Tecnun" class="logo-header">
         <div>
             <h1>Informática para la Investigación</h1>
-            <p class="site-subtitle">IA aplicada a la localización de vehículos autónomos · TECNUN</p>
+            <p class="site-subtitle">IA aplicada a la localización en espacios interiores · TECNUN</p>
         </div>
     </div>
     <nav class="tab-nav" role="navigation" aria-label="Módulos">
@@ -42,46 +42,45 @@
 
 <main class="main-content">
 
-    <!-- ====== MÓDULO 1: HTML SEMÁNTICO ====== -->
     <section id="m1" class="modulo activo" aria-label="Módulo 1 HTML Semántico">
         <div class="modulo-intro">
             <span class="modulo-badge">Módulo 01</span>
             <h2>HTML Semántico</h2>
-            <p>El contenido estructurado como fundamento de la web. Usamos etiquetas que dan <em>significado</em> al documento, no solo forma visual.</p>
+            <p>El contenido estructurado como fundamento de la web. Se usaron etiquetas que dan <em>significado</em> al documento, no solo forma visual.</p>
         </div>
 
         <article class="articulo-semantico">
             <header>
-                <h3>Localización en Vehículos Autónomos</h3>
+                <h3>Localización en Espacios Interiores</h3>
                 <p><time datetime="2026">2026</time> · Investigación doctoral · TECNUN — Universidad de Navarra</p>
             </header>
 
             <section>
-                <h4>¿Qué es la localización vehicular?</h4>
-                <p>La <strong>localización</strong> es la capacidad de un vehículo autónomo de conocer su posición exacta en el mundo en tiempo real. Sin ella, ningún sistema de navegación, planificación de trayectoria o evitación de obstáculos puede funcionar correctamente.</p>
-                <p>Los sistemas actuales combinan múltiples sensores para estimar la posición con <mark>precisión centimétrica</mark>, un requisito esencial para la seguridad vial.</p>
+                <h4>¿Qué es la localización en interiores?</h4>
+                <p>La <strong>localización en interiores (Indoor Positioning)</strong> es la capacidad de determinar la ubicación de activos, robots industriales (AGVs) o personas dentro de entornos cerrados como almacenes, hospitales o aeropuertos. En estos escenarios, las señales de satélite tradicionales quedan bloqueadas o sufren demasiadas atenuaciones.</p>
+                <p>Los sistemas modernos aprovechan la infraestructura de radiofrecuencia y sensores inerciales locales para estimar la posición con <mark>precisión de alta fidelidad</mark>, crucial para la automatización logística y la seguridad de los operarios.</p>
             </section>
 
             <section>
-                <h4>Tecnologías de localización</h4>
+                <h4>Tecnologías de posicionamiento interno</h4>
                 <dl>
-                    <dt>GPS / GNSS</dt>
-                    <dd>Sistema de posicionamiento global por satélite. Precisión estándar: 3–5 m. Degradado en túneles, entornos urbanos densos y condiciones atmosféricas adversas.</dd>
-                    <dt>LiDAR</dt>
-                    <dd>Sensor láser de distancia 3D. Genera nubes de puntos de alta densidad. Precisión: &lt;10 cm. Alto coste computacional y económico.</dd>
-                    <dt>Cámara estéreo</dt>
-                    <dd>Profundidad visual por disparidad. Sensible a condiciones de iluminación. Complementa al LiDAR a menor coste y añade información semántica.</dd>
-                    <dt>IMU (Unidad de Medición Inercial)</dt>
-                    <dd>Mide aceleración y velocidad angular a alta frecuencia (~1000 Hz). Independiente de señal exterior, pero acumula error (deriva) con el tiempo.</dd>
+                    <dt>Wi-Fi RTT / Fingerprinting</dt>
+                    <dd>Posicionamiento basado en la infraestructura de red existente. El método RTT (Round Trip Time) mide tiempos de vuelo, mientras que el Fingerprinting asocia un mapa de intensidades de señal (RSSI). Precisión típica: 2–5 m.</dd>
+                    <dt>UWB (Ultra-Wideband)</dt>
+                    <dd>Tecnología de radio de banda ultraancha que mide distancias exactas mediante impulsos de corto alcance (ToF). Ofrece una inmunidad excelente al multitrayecto y una precisión <mark>centimétrica (&lt;10 cm)</mark> a cambio de un mayor coste de despliegue.</dd>
+                    <dt>Balizas BLE (Bluetooth Low Energy)</dt>
+                    <dd>Dispositivos de bajo coste y consumo que emiten señales periódicas. Permiten localización por proximidad o triangulación RSSI básica en smartphones o etiquetas activas. Precisión: 1–3 m.</dd>
+                    <dt>IMU / PDR (Pedestrian Dead Reckoning)</dt>
+                    <dd>Unidades inerciales que registran aceleración y giros a alta frecuencia (~200 Hz). Utilizadas para estimar el avance a través del conteo de pasos o la odometría de robots, sufriendo una fuerte deriva de error acumulativo a largo plazo.</dd>
                 </dl>
             </section>
 
             <section>
                 <h4>El reto: fusión de sensores con IA</h4>
-                <p>Cada sensor tiene fortalezas y debilidades específicas. La investigación actual explora cómo las <strong>redes neuronales y los algoritmos bayesianos</strong> —como el Filtro de Kalman Extendido o los Filtros de Partículas— pueden combinarlos de forma óptima para obtener una estimación robusta y precisa.</p>
+                <p>Las tecnologías inalámbricas presentan fluctuaciones severas debido a la atenuación por muros, objetos metálicos y presencia humana. La investigación actual explora cómo el uso de <strong>redes neuronales recurrentes y filtros bayesianos</strong> —como el Filtro de Kalman o Filtros de Partículas— suavizan el ruido electromagnético combinándolo con la constancia de los sensores inerciales.</p>
                 <blockquote cite="https://arxiv.org/">
-                    "La fusión de sensores guiada por IA reduce el error de posicionamiento hasta un 90% respecto al GPS estándar en entornos urbanos complejos."
-                    <footer>— Revisión bibliográfica, IEEE Transactions on Intelligent Vehicles, 2024</footer>
+                    "La fusión inteligente de señales UWB/BLE con algoritmos cinemáticos basados en IA reduce el error de posicionamiento interno en más de un 85% frente a métodos tradicionales basados puramente en proximidad RSSI."
+                    <footer>— Revisión bibliográfica, IEEE Internet of Things Journal, 2025</footer>
                 </blockquote>
             </section>
 
@@ -91,13 +90,12 @@
             </aside>
 
             <footer>
-                <p>Fuentes: IEEE Transactions on Intelligent Vehicles · arXiv.org · Autonomous Vehicles Research Journal</p>
+                <p>Fuentes: IEEE Internet of Things Journal · arXiv.org · Indoor Positioning and Indoor Navigation (IPIN) Conference</p>
             </footer>
         </article>
     </section>
 
 
-    <!-- ====== MÓDULO 2: CSS ====== -->
     <section id="m2" class="modulo" aria-label="Módulo 2 CSS">
         <div class="modulo-intro">
             <span class="modulo-badge">Módulo 02</span>
@@ -106,70 +104,69 @@
         </div>
 
         <div class="sensor-grid" id="sensorGrid">
-            <article class="sensor-card sensor-card--gps">
-                <div class="sensor-icon">📡</div>
-                <h3>GPS / GNSS</h3>
+            <article class="sensor-card sensor-card--wifi">
+                <div class="sensor-icon">📶</div>
+                <h3>Wi-Fi</h3>
                 <div class="sensor-stats">
-                    <div class="stat"><span class="stat-val">3–5 m</span><span class="stat-label">Error típico</span></div>
-                    <div class="stat"><span class="stat-val">10 Hz</span><span class="stat-label">Frecuencia</span></div>
+                    <div class="stat"><span class="stat-val">2–5 m</span><span class="stat-label">Error típico</span></div>
+                    <div class="stat"><span class="stat-val">2 Hz</span><span class="stat-label">Frecuencia</span></div>
                 </div>
-                <div class="sensor-bar-wrap"><div class="sensor-bar sensor-bar--low" style="width:20%"></div></div>
-                <p class="sensor-desc">Global, sin mantenimiento local. Degradado en entornos cerrados y con multipaths urbanos.</p>
+                <div class="sensor-bar-wrap"><div class="sensor-bar sensor-bar--low" style="width:25%"></div></div>
+                <p class="sensor-desc">Aprovecha infraestructuras ya instaladas. Muy afectado por la atenuación de paredes y el desvanecimiento de señal.</p>
                 <span class="sensor-tag">Infraestructura</span>
             </article>
 
-            <article class="sensor-card sensor-card--lidar">
-                <div class="sensor-icon">🔴</div>
-                <h3>LiDAR</h3>
+            <article class="sensor-card sensor-card--uwb">
+                <div class="sensor-icon">🎯</div>
+                <h3>UWB</h3>
                 <div class="sensor-stats">
                     <div class="stat"><span class="stat-val">&lt;10 cm</span><span class="stat-label">Error típico</span></div>
-                    <div class="stat"><span class="stat-val">20 Hz</span><span class="stat-label">Frecuencia</span></div>
+                    <div class="stat"><span class="stat-val">50 Hz</span><span class="stat-label">Frecuencia</span></div>
                 </div>
-                <div class="sensor-bar-wrap"><div class="sensor-bar sensor-bar--high" style="width:93%"></div></div>
-                <p class="sensor-desc">Alta precisión 3D. Robusto de noche. Afectado por lluvia intensa y polvo. Coste elevado.</p>
-                <span class="sensor-tag">Proximidad</span>
+                <div class="sensor-bar-wrap"><div class="sensor-bar sensor-bar--high" style="width:95%"></div></div>
+                <p class="sensor-desc">Inmunidad excelente al multitrayecto. Precisión de grado industrial. Alta inversión en infraestructura dedicada.</p>
+                <span class="sensor-tag">Alta precisión</span>
             </article>
 
-            <article class="sensor-card sensor-card--cam">
-                <div class="sensor-icon">📷</div>
-                <h3>Cámara estéreo</h3>
+            <article class="sensor-card sensor-card--ble">
+                <div class="sensor-icon">🔹</div>
+                <h3>Balizas BLE</h3>
                 <div class="sensor-stats">
-                    <div class="stat"><span class="stat-val">10–30 cm</span><span class="stat-label">Error típico</span></div>
-                    <div class="stat"><span class="stat-val">30 Hz</span><span class="stat-label">Frecuencia</span></div>
+                    <div class="stat"><span class="stat-val">1–3 m</span><span class="stat-label">Error típico</span></div>
+                    <div class="stat"><span class="stat-val">10 Hz</span><span class="stat-label">Frecuencia</span></div>
                 </div>
-                <div class="sensor-bar-wrap"><div class="sensor-bar sensor-bar--med" style="width:68%"></div></div>
-                <p class="sensor-desc">Rica información semántica. Sensible a cambios de iluminación y condiciones climáticas.</p>
-                <span class="sensor-tag">Visual</span>
+                <div class="sensor-bar-wrap"><div class="sensor-bar sensor-bar--med" style="width:60%"></div></div>
+                <p class="sensor-desc">Económico y fácil de desplegar mediante baterías independientes. Sensible a la interferencia del cuerpo humano.</p>
+                <span class="sensor-tag">Proximidad</span>
             </article>
 
             <article class="sensor-card sensor-card--imu">
                 <div class="sensor-icon">⚡</div>
-                <h3>IMU</h3>
+                <h3>IMU (Inercial)</h3>
                 <div class="sensor-stats">
-                    <div class="stat"><span class="stat-val">~1 cm/s²</span><span class="stat-label">Resolución</span></div>
-                    <div class="stat"><span class="stat-val">1000 Hz</span><span class="stat-label">Frecuencia</span></div>
+                    <div class="stat"><span class="stat-val">Dinámico</span><span class="stat-label">Resolución</span></div>
+                    <div class="stat"><span class="stat-val">200 Hz</span><span class="stat-label">Frecuencia</span></div>
                 </div>
-                <div class="sensor-bar-wrap"><div class="sensor-bar sensor-bar--med" style="width:55%"></div></div>
-                <p class="sensor-desc">Altísima frecuencia. Independiente de señal exterior. Deriva acumulativa con el tiempo.</p>
-                <span class="sensor-tag">Inercial</span>
+                <div class="sensor-bar-wrap"><div class="sensor-bar sensor-bar--med" style="width:50%"></div></div>
+                <p class="sensor-desc">Autónomo y continuo, no requiere señal externa. El error se acumula rápidamente sin una referencia absoluta.</p>
+                <span class="sensor-tag">A estima</span>
             </article>
 
             <article class="sensor-card sensor-card--fusion">
                 <div class="sensor-icon">🤖</div>
                 <h3>Fusión con IA</h3>
                 <div class="sensor-stats">
-                    <div class="stat"><span class="stat-val">&lt;5 cm</span><span class="stat-label">Error típico</span></div>
+                    <div class="stat"><span class="stat-val">&lt;15 cm</span><span class="stat-label">Error típico</span></div>
                     <div class="stat"><span class="stat-val">Adaptativa</span><span class="stat-label">Frecuencia</span></div>
                 </div>
-                <div class="sensor-bar-wrap"><div class="sensor-bar sensor-bar--top" style="width:97%"></div></div>
-                <p class="sensor-desc">Combina todos los sensores compensando sus debilidades individuales. Objetivo de la investigación.</p>
+                <div class="sensor-bar-wrap"><div class="sensor-bar sensor-bar--top" style="width:98%"></div></div>
+                <p class="sensor-desc">Integra señales de radio inconstantes con cinemática inercial mediante algoritmos inteligentes de corrección.</p>
                 <span class="sensor-tag sensor-tag--ia">IA</span>
             </article>
         </div>
     </section>
 
 
-    <!-- ====== MÓDULO 3: JS BÁSICO ====== -->
     <section id="m3" class="modulo" aria-label="Módulo 3 JS Básico">
         <div class="modulo-intro">
             <span class="modulo-badge">Módulo 03</span>
@@ -179,25 +176,25 @@
 
         <div class="m3-layout">
             <div class="m3-demo-card">
-                <h3>Demo: Ruido GPS en tiempo real</h3>
-                <p>Simula cómo el ruido gaussiano afecta a una señal GPS. Ajusta el nivel de ruido y añade mediciones para observar la dispersión alrededor de la posición real.</p>
+                <h3>Demo: Ruido electromagnético en Balizas Inalámbricas</h3>
+                <p>Simula cómo la fluctuación del entorno (atenuaciones y rebotes) corrompe la estimación de distancia de una señal de radio interna. Ajusta la variabilidad para observar la dispersión.</p>
                 <div class="gps-canvas-wrap">
                     <canvas id="gpsDemo" width="380" height="260"></canvas>
                 </div>
                 <div class="control-row">
-                    <label for="noiseSlider">Ruido: <strong id="noiseVal">15</strong> m</label>
+                    <label for="noiseSlider">Varianza de señal: <strong id="noiseVal">15</strong> m</label>
                     <input type="range" id="noiseSlider" min="2" max="50" value="15">
                 </div>
                 <div class="control-row">
-                    <button id="btnAddMeasure" class="btn-primary">+ Añadir medición GPS</button>
+                    <button id="btnAddMeasure" class="btn-primary">+ Añadir ping inalámbrico</button>
                     <button id="btnClearMeasure" class="btn-secondary">Limpiar</button>
                 </div>
                 <div id="gpsStats" class="stats-row">Sin mediciones aún.</div>
             </div>
 
             <div class="m3-demo-card">
-                <h3>Quiz: ¿Qué sensor usarías?</h3>
-                <p>Pon a prueba tu comprensión sobre cuándo usar cada tecnología de localización.</p>
+                <h3>Quiz: ¿Qué tecnología interna usarías?</h3>
+                <p>Pon a prueba tu comprensión sobre el despliegue de tecnologías de posicionamiento en interiores.</p>
                 <div id="quiz"></div>
                 <div id="quizResult" class="quiz-result"></div>
                 <p class="local-storage-note">Tu puntuación se guarda automáticamente en <code>localStorage</code>.</p>
@@ -206,7 +203,6 @@
     </section>
 
 
-    <!-- ====== MÓDULO 4: DATOS ====== -->
     <section id="m4" class="modulo" aria-label="Módulo 4 Datos">
         <div class="modulo-intro">
             <span class="modulo-badge">Módulo 04</span>
@@ -216,35 +212,35 @@
 
         <div class="m4-filtros">
             <span>Filtrar sensores:</span>
-            <label><input type="checkbox" class="sensor-check" value="GPS" checked> GPS</label>
-            <label><input type="checkbox" class="sensor-check" value="LiDAR" checked> LiDAR</label>
-            <label><input type="checkbox" class="sensor-check" value="Cámara" checked> Cámara</label>
+            <label><input type="checkbox" class="sensor-check" value="Wi-Fi" checked> Wi-Fi</label>
+            <label><input type="checkbox" class="sensor-check" value="UWB" checked> UWB</label>
+            <label><input type="checkbox" class="sensor-check" value="BLE" checked> BLE</label>
             <label><input type="checkbox" class="sensor-check" value="IMU" checked> IMU</label>
             <label><input type="checkbox" class="sensor-check" value="Fusión IA" checked> Fusión IA</label>
         </div>
 
         <div class="charts-grid">
             <div class="chart-card">
-                <h3>Error medio de posicionamiento (m)</h3>
+                <h3>Error medio de posicionamiento interno (m)</h3>
                 <canvas id="chartBar" height="220"></canvas>
             </div>
             <div class="chart-card">
-                <h3>Convergencia del Filtro de Kalman vs GPS</h3>
+                <h3>Convergencia del Filtro de Kalman vs Fluctuación Wi-Fi</h3>
                 <canvas id="chartLine" height="220"></canvas>
             </div>
         </div>
 
         <div class="tabla-datos">
-            <h3>Tabla comparativa de sensores</h3>
+            <h3>Tabla comparativa de tecnologías en interiores</h3>
             <table id="tablaSensores">
                 <thead>
                     <tr>
-                        <th>Sensor</th>
+                        <th>Tecnología</th>
                         <th>Error medio (m)</th>
                         <th>Desviación std (m)</th>
                         <th>Frecuencia (Hz)</th>
-                        <th>Coste</th>
-                        <th>Robustez</th>
+                        <th>Coste de Despliegue</th>
+                        <th>Robustez Estructural</th>
                     </tr>
                 </thead>
                 <tbody></tbody>
@@ -253,27 +249,28 @@
     </section>
 
 
-    <!-- ====== MÓDULO 5: SIMULACIÓN IA ====== -->
     <section id="m5" class="modulo" aria-label="Módulo 5 Simulación IA">
         <div class="modulo-intro">
             <span class="modulo-badge modulo-badge--ia">Módulo 05 · Investigación</span>
-            <h2>Simulación: IA en Localización Vehicular</h2>
-            <p>Demostración interactiva del <strong>Filtro de Kalman</strong> aplicado a la corrección de señal GPS en un vehículo autónomo. Compara la medición bruta del GPS con la estimación filtrada.</p>
+            <h2>Simulación: IA y Filtros en Posicionamiento de Interiores</h2>
+            <p>Demostración interactiva de un <strong>Filtro de Kalman 2D</strong> procesando pings de radiofrecuencia (Wi-Fi/UWB/BLE). El entorno cuenta con <strong>3 Anclas fijas</strong> y <strong>1 Muro central</strong>. Observa cómo, al bloquearse la línea de visión (<strong>NLOS</strong>), el multitrayecto dispara el error y deforma la estimación.</p>
         </div>
 
         <div class="sim-layout">
             <div class="sim-canvas-wrap">
                 <canvas id="simCanvas" width="640" height="380"></canvas>
                 <div class="canvas-legend">
-                    <span class="legend-item legend-true">Trayectoria real</span>
-                    <span class="legend-item legend-gps">Medición GPS</span>
-                    <span class="legend-item legend-kalman">Estimación filtrada</span>
+                    <span class="legend-item legend-true">Trayectoria real AGV</span>
+                    <span class="legend-item legend-gps">Lectura de radio (Ruidosa)</span>
+                    <span class="legend-item legend-kalman">Trayectoria filtrada</span>
+                    <span class="legend-item legend-anchor">Ancla Estática</span>
+                    <span class="legend-item legend-obstacle">Muro (Obstáculo NLOS)</span>
                 </div>
             </div>
 
             <div class="sim-controls">
                 <div class="control-group">
-                    <h4>Control</h4>
+                    <h4>Control de Simulación</h4>
                     <div class="btn-row">
                         <button id="simPlay" class="btn-primary">▶ Play</button>
                         <button id="simReset" class="btn-secondary">↺ Reset</button>
@@ -286,47 +283,47 @@
                 </div>
 
                 <div class="control-group">
-                    <h4>Ruido GPS (σ)</h4>
+                    <h4>Ruido Base de Radio (σ)</h4>
                     <div class="noise-btns">
-                        <button class="noise-btn active" data-noise="10">Bajo <small>±10 px</small></button>
-                        <button class="noise-btn" data-noise="25">Medio <small>±25 px</small></button>
-                        <button class="noise-btn" data-noise="50">Alto <small>±50 px</small></button>
+                        <button class="noise-btn active" data-noise="8">Entorno Despejado <small>±8 px</small></button>
+                        <button class="noise-btn" data-noise="18">Interferencia Media <small>±18 px</small></button>
+                        <button class="noise-btn" data-noise="30">Alta Interferencia <small>±30 px</small></button>
                     </div>
                 </div>
 
                 <div class="control-group">
-                    <h4>Algoritmo de corrección</h4>
+                    <h4>Algoritmo de Corrección</h4>
                     <select id="algoSelect">
-                        <option value="kalman">Filtro de Kalman</option>
-                        <option value="moving">Media móvil (N=8)</option>
-                        <option value="gps">Sin filtro (GPS crudo)</option>
+                        <option value="kalman">Filtro de Kalman 2D</option>
+                        <option value="moving">Media Móvil Ventana (N=8)</option>
+                        <option value="gps">Sin Filtrar (Muestreo Bruto)</option>
                     </select>
                 </div>
 
                 <div class="control-group sim-stats">
-                    <h4>Métricas en tiempo real</h4>
+                    <h4>Métricas en Planta (Tiempo Real)</h4>
                     <div class="stat-block">
-                        <span class="stat-name">RMSE GPS</span>
+                        <span class="stat-name">Enlaces en NLOS</span>
+                        <span class="stat-value stat-good" id="nlosLinks">0 / 3</span>
+                    </div>
+                    <div class="stat-block">
+                        <span class="stat-name">RMSE Señal Bruta</span>
                         <span class="stat-value stat-bad" id="rmseGPS">—</span>
                     </div>
                     <div class="stat-block">
-                        <span class="stat-name">RMSE Estimado</span>
+                        <span class="stat-name">RMSE Filtrado</span>
                         <span class="stat-value stat-good" id="rmseKalman">—</span>
                     </div>
                     <div class="stat-block">
-                        <span class="stat-name">Mejora</span>
+                        <span class="stat-name">Tasa de Mejora</span>
                         <span class="stat-value stat-highlight" id="rmseMejora">—</span>
-                    </div>
-                    <div class="stat-block">
-                        <span class="stat-name">Mediciones</span>
-                        <span class="stat-value" id="numMediciones">0</span>
                     </div>
                 </div>
             </div>
         </div>
 
         <div class="chart-card sim-chart-card">
-            <h3>Error de posicionamiento en tiempo real (px)</h3>
+            <h3>Variación instantánea del error en planta (px)</h3>
             <canvas id="chartError" height="130"></canvas>
         </div>
     </section>

@@ -232,9 +232,10 @@ mark {
 }
 .sensor-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-md); }
 
-.sensor-card--gps    { border-top-color: #64748b; }
-.sensor-card--lidar  { border-top-color: var(--red); }
-.sensor-card--cam    { border-top-color: var(--orange); }
+/* Temáticas visuales de tarjetas modificadas para interiores */
+.sensor-card--wifi   { border-top-color: #64748b; }
+.sensor-card--uwb    { border-top-color: var(--red); }
+.sensor-card--ble    { border-top-color: var(--orange); }
 .sensor-card--imu    { border-top-color: var(--green); }
 .sensor-card--fusion { border-top-color: var(--purple); background: linear-gradient(135deg,#faf5ff,white); }
 
@@ -525,3 +526,19 @@ select {
 }
 .site-footer a { color: var(--blue); text-decoration: none; }
 .site-footer a:hover { text-decoration: underline; }
+
+/* Leyenda personalizada para el Módulo 5 Indoor */
+.legend-anchor::before {
+    width: 10px;
+    height: 10px;
+    background: #f59e0b;
+    border-radius: 50%;
+    border: 1px solid white;
+}
+
+.legend-obstacle::before {
+    width: 16px;
+    height: 10px;
+    background: rgba(148, 163, 184, 0.4);
+    border: 1px solid #64748b;
+}
